@@ -1,6 +1,6 @@
 To do list:
 
--Make script to combine egg count datasets between observers and split into marker free and marker present
+-Make script to combine egg count datasets between observers and split into marker free and marker present (Melika)
 -Export adult count datasets from separate excel worksheets into individual CSV files; also pull out phenotypic class worksheets and put in main raw data folder
 -Add adult count to R script and incorporate measures of survival 
 -Output needs to feed into next script Viability Goodness of Fit
