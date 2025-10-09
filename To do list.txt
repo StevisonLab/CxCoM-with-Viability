@@ -1,3 +1,13 @@
 To do list:
 
--Make script to combine egg count datasets between observers
+-Make script to combine egg count datasets between observers and split into marker free and marker present
+-Export adult count datasets from separate excel worksheets into individual CSV files; also pull out phenotypic class worksheets and put in main raw data folder
+-Add adult count to R script and incorporate measures of survival 
+-Output needs to feed into next script Viability Goodness of Fit
+
+-update script 2 to work within this directory structure 
+
+-Make 3rd script to read in exported CSV from recombination data and reorganize in preparation for counting model (Melika will provide some templates from her project)
+
+-Split script 4 of the counting model into separate scripts - two for the main functions and one that is a driver
+
