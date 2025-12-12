@@ -1,4 +1,8 @@
-setwd("...") # Please use Raw Data as working directory
+setwd("Raw Data/") # Please use Raw Data as working directory
+
+# Load functions
+source(file = "../Code/missing_data_single_locus_custom_functions.R")
+source(file = "../Code/missing_data_multi_locus_custom_functions.R")
 
 # Load package dfoptim
 library(dfoptim)
@@ -51,7 +55,7 @@ marker_free_viability_anova_input$Brood <- as.numeric(marker_free_viability_anov
 marker_free_viability_anova.lm <- lm(Viability ~ Brood + Sex + Cross, data=marker_free_viability_anova_input)
 marker_free_viability_anova.table <- anova(marker_free_viability_anova.lm)
 marker_free_viability_regression_coefficients <- summary(marker_free_viability_anova.lm)
-write.csv(marker_free_viability_anova.table,"table_S1_marker_free_viability_regression.csv",row.names = TRUE)
+write.csv(marker_free_viability_anova.table,"../Statistical Analysis/table_S1_marker_free_viability_regression.csv",row.names = TRUE)
 
 # Read in csv files of raw count data from the multiply marked cross
 EH_multiply_marked_egg_count <- read.csv("1_EH_raw_multiply_marked_egg_counts.csv", header=TRUE)
