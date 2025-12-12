@@ -1,29 +1,29 @@
-setwd("~/Desktop/local_missing_data")
+setwd("Raw Data/")
 
 # Read in csv files of raw count data from the marker free cross
-EH_marker_free_egg_count <- read.csv("A_EH_raw_marker_free_egg_counts.csv", header=TRUE)
-MS_marker_free_egg_count <- read.csv("B_MS_raw_marker_free_egg_counts.csv", header=TRUE)
-SK_marker_free_adult_count <- read.csv("C_SK_raw_marker_free_adult_counts.csv", header=TRUE)
+EH_marker_free_egg_count <- read.csv("Raw_Egg_Counts/A_EH_raw_marker_free_egg_counts.csv", header=TRUE)
+MS_marker_free_egg_count <- read.csv("Raw_Egg_Counts/B_MS_raw_marker_free_egg_counts.csv", header=TRUE)
+SK_marker_free_adult_count <- read.csv("Raw_Adult_Counts/C_SK_raw_marker_free_adult_counts.csv", header=TRUE)
 
 # Compile the raw data from different observers and life history stages
 EH_raw_marker_free_total_egg_count <- EH_marker_free_egg_count$total_egg_count
 MS_raw_marker_free_total_egg_count <- MS_marker_free_egg_count$total_egg_count
 compiled_raw_marker_free_dataset <- cbind(SK_marker_free_adult_count,EH_raw_marker_free_total_egg_count,MS_raw_marker_free_total_egg_count)
-write.csv(compiled_raw_marker_free_dataset,"/Users/spencerkoury/Desktop/local_missing_data/D_compiled_raw_marker_free_dataset.csv",row.names = TRUE)
+write.csv(compiled_raw_marker_free_dataset,"../Summaries and Outputs/D_compiled_raw_marker_free_dataset.csv",row.names = TRUE)
 
 # Transform individual raw egg counts to address undercounting the average and round these two counts to the nearest whole number
 EH_transformed_marker_free_total_egg_count <-(EH_raw_marker_free_total_egg_count-2.383755)/0.9459906 # Slope and Intercept from Type II Regression on Schneider et al. 2025 dataset
 MS_transformed_marker_free_total_egg_count <-(MS_raw_marker_free_total_egg_count-11.07247)/0.7537183 # Slope and Intercept from Type II Regression on Schneider et al. 2025 dataset
 transformed_mean_marker_free_total_egg_count <-round((EH_transformed_marker_free_total_egg_count+MS_transformed_marker_free_total_egg_count)/2)
 derived_marker_free_dataset <-cbind(compiled_raw_marker_free_dataset,transformed_mean_marker_free_total_egg_count)
-write.csv(derived_marker_free_dataset,"/Users/spencerkoury/Desktop/local_missing_data/E_derived_marker_free_dataset.csv",row.names = TRUE)
+write.csv(derived_marker_free_dataset,"../Summaries and Outputs/E_derived_marker_free_dataset.csv",row.names = TRUE)
 
 # Calculate the per vial viability of females, males, and total under the 1:1 primary sex ratio assumption
 derived_marker_free_female_viability <- derived_marker_free_dataset$female_adult_count/(derived_marker_free_dataset$transformed_mean_marker_free_total_egg_count/2)
 derived_marker_free_male_viability <- derived_marker_free_dataset$male_adult_count/(derived_marker_free_dataset$transformed_mean_marker_free_total_egg_count/2)
 derived_marker_free_total_viability <- derived_marker_free_dataset$total_adult_count/derived_marker_free_dataset$transformed_mean_marker_free_total_egg_count
 marker_free_viability_dataset <-cbind(derived_marker_free_dataset,derived_marker_free_female_viability,derived_marker_free_male_viability,derived_marker_free_total_viability)
-write.csv(marker_free_viability_dataset,"/Users/spencerkoury/Desktop/local_missing_data/F_marker_free_viability_dataset.csv",row.names = TRUE)
+write.csv(marker_free_viability_dataset,"../Summaries and Outputs/F_marker_free_viability_dataset.csv",row.names = TRUE)
 
 # Compute the overall viabilities for reporting in main text
 overall_marker_free_viability <- mean(derived_marker_free_total_viability)
@@ -48,18 +48,18 @@ marker_free_viability_anova_input$Brood <- as.numeric(marker_free_viability_anov
 marker_free_viability_anova.lm <- lm(Viability ~ Brood + Sex + Cross, data=marker_free_viability_anova_input)
 marker_free_viability_anova.table <- anova(marker_free_viability_anova.lm)
 marker_free_viability_regression_coefficients <- summary(marker_free_viability_anova.lm)
-write.csv(marker_free_viability_anova.table,"/Users/spencerkoury/Desktop/local_missing_data/table_S1_marker_free_viability_regression.csv",row.names = TRUE)
+write.csv(marker_free_viability_anova.table,"../Summaries and Outputs/table_S1_marker_free_viability_regression.csv",row.names = TRUE)
 
 # Read in csv files of raw count data from the multiply marked cross
-EH_multiply_marked_egg_count <- read.csv("1_EH_raw_multiply_marked_egg_counts.csv", header=TRUE)
-MS_multiply_marked_egg_count <- read.csv("2_MS_raw_multiply_marked_egg_counts.csv", header=TRUE)
-SK_multiply_marked_adult_phenotypic_class_counts <- read.csv("3_SK_raw_multiply_marked_adult_phenotypic_class_counts.csv", header=TRUE)
+EH_multiply_marked_egg_count <- read.csv("Raw_Egg_Counts/1_EH_raw_multiply_marked_egg_counts.csv", header=TRUE)
+MS_multiply_marked_egg_count <- read.csv("Raw_Egg_Counts/2_MS_raw_multiply_marked_egg_counts.csv", header=TRUE)
+SK_multiply_marked_adult_phenotypic_class_counts <- read.csv("Raw_Adult_Counts/3_SK_raw_multiply_marked_adult_phenotypic_class_counts.csv", header=TRUE)
 
 # Compile the raw data from different observers and life history stages
 EH_raw_multiply_marked_total_egg_count <- EH_multiply_marked_egg_count$total_egg_count
 MS_raw_multiply_marked_total_egg_count <- MS_multiply_marked_egg_count$total_egg_count
 compiled_raw_multiply_marked_dataset <- cbind(SK_multiply_marked_adult_phenotypic_class_counts,EH_raw_multiply_marked_total_egg_count,MS_raw_multiply_marked_total_egg_count)
-write.csv(compiled_raw_multiply_marked_dataset,"/Users/spencerkoury/Desktop/local_missing_data/4_compiled_raw_multiply_marked_dataset.csv",row.names = TRUE)
+write.csv(compiled_raw_multiply_marked_dataset,"../Summaries and Outputs/4_compiled_raw_multiply_marked_dataset.csv",row.names = TRUE)
 
 # Transform individual raw egg counts to address undercounting the average and round these two counts to the nearest whole number
 EH_transformed_multiply_marked_total_egg_count <-(EH_raw_multiply_marked_total_egg_count-2.383755)/0.9459906 # Slope and Intercept from Type II anova on Schneider et al. 2025 dataset
