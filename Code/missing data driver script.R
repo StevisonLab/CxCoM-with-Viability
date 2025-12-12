@@ -66,14 +66,14 @@ EH_transformed_multiply_marked_total_egg_count <-(EH_raw_multiply_marked_total_e
 MS_transformed_multiply_marked_total_egg_count <-(MS_raw_multiply_marked_total_egg_count-11.07247)/0.7537183 # Slope and Intercept from Type II anova on Schneider et al. 2025 dataset
 transformed_mean_multiply_marked_total_egg_count <-round((EH_transformed_multiply_marked_total_egg_count+MS_transformed_multiply_marked_total_egg_count)/2)
 derived_multiply_marked_dataset <-cbind(compiled_raw_multiply_marked_dataset,transformed_mean_multiply_marked_total_egg_count)
-write.csv(derived_multiply_marked_dataset,"/Users/spencerkoury/Desktop/local_missing_data/5_derived_multiply_marked_dataset.csv",row.names = TRUE)
+write.csv(derived_multiply_marked_dataset,"../Summaries and Outputs/5_derived_multiply_marked_dataset.csv",row.names = TRUE)
 
 # Calculate the per vial viability of females, males, and total under the 1:1 primary sex ratio assumption
 derived_multiply_marked_female_viability <- derived_multiply_marked_dataset$female_adult_count/(derived_multiply_marked_dataset$transformed_mean_multiply_marked_total_egg_count/2)
 derived_multiply_marked_male_viability <- derived_multiply_marked_dataset$male_adult_count/(derived_multiply_marked_dataset$transformed_mean_multiply_marked_total_egg_count/2)
 derived_multiply_marked_total_viability <- derived_multiply_marked_dataset$total_adult_count/derived_multiply_marked_dataset$transformed_mean_multiply_marked_total_egg_count
 multiply_marked_viability_dataset <-cbind(derived_multiply_marked_dataset,derived_multiply_marked_female_viability,derived_multiply_marked_male_viability,derived_multiply_marked_total_viability)
-write.csv(multiply_marked_viability_dataset,"/Users/spencerkoury/Desktop/local_missing_data/6_multiply_marked_viability_dataset.csv",row.names = TRUE)
+write.csv(multiply_marked_viability_dataset,"../Summaries and Outputs/6_multiply_marked_viability_dataset.csv",row.names = TRUE)
 
 # Compute the overall mean viabilities for reporting in main text (excluding Broods G, H, and I where adult flies could not be scored)
 overall_multiply_marked_viability <- mean(derived_multiply_marked_total_viability[-c(61:90)])
@@ -101,7 +101,7 @@ cleaned_multiply_marked_viability_anova_input <- multiply_marked_viability_anova
 multiply_marked_viability_anova.lm <- lm(Viability ~ Brood + Sex + Cross, data=cleaned_multiply_marked_viability_anova_input)
 multiply_marked_viability_anova.table <- anova(multiply_marked_viability_anova.lm)
 multiply_marked_viability_regression_coefficients <- summary(multiply_marked_viability_anova.lm)
-write.csv(multiply_marked_viability_anova.table,"/Users/spencerkoury/Desktop/local_missing_data/table_S2_multiply_marked_viability_regression.csv",row.names = TRUE)
+write.csv(multiply_marked_viability_anova.table,"../Summaries and Outputs/table_S2_multiply_marked_viability_regression.csv",row.names = TRUE)
 
 #Create 6 single locus datasets as vectors
 phenotypic_class_dataset <- multiply_marked_viability_dataset[,c(7:134)]
@@ -237,7 +237,7 @@ scute_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                     phenotypic_class_sums_vector[128]),
                                 4795)
 names(scute_single_locus_dataset) <- c("female_wildtype","female_mutant","male_wildtype","male_mutant", "lethal_zygote")
-write.csv(scute_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/7_scute_single_locus_dataset.csv",row.names = TRUE)
+write.csv(scute_single_locus_dataset,"../Summaries and Outputs/7_scute_single_locus_dataset.csv",row.names = TRUE)
 
 # custom script for goodness-of-fit G-test for marker viability effects under six models of viability
 # H0: no excess experimental mortality in multiply-marked crosses above and beyond the marker-free cross,
@@ -571,7 +571,7 @@ crossveinless_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                            phenotypic_class_sums_vector[127]),
                                        4795)
 names(crossveinless_single_locus_dataset) <- c("female_wildtype","female_mutant","male_wildtype","male_mutant", "lethal_zygote")
-write.csv(crossveinless_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/8_crossveinless_single_locus_dataset.csv",row.names = TRUE)
+write.csv(crossveinless_single_locus_dataset,"../Summaries and Outputs/8_crossveinless_single_locus_dataset.csv",row.names = TRUE)
 
 vermilion_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                          phenotypic_class_sums_vector[3],
@@ -703,7 +703,7 @@ vermilion_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                          phenotypic_class_sums_vector[128]),
                                      4795)
 names(vermilion_single_locus_dataset) <- c("female_wildtype","female_mutant","male_wildtype","male_mutant", "lethal_zygote")
-write.csv(vermilion_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/9_vermilion_single_locus_dataset.csv",row.names = TRUE)
+write.csv(vermilion_single_locus_dataset,"../Summaries and Outputs/9_vermilion_single_locus_dataset.csv",row.names = TRUE)
 
 forked_single_locus_dataset <-c(sum(phenotypic_class_sums_vector[1],
                                     phenotypic_class_sums_vector[3],
@@ -835,7 +835,7 @@ forked_single_locus_dataset <-c(sum(phenotypic_class_sums_vector[1],
                                     phenotypic_class_sums_vector[127]),
                                 4795)
 names(forked_single_locus_dataset) <- c("female_wildtype","female_mutant","male_wildtype","male_mutant", "lethal_zygote")
-write.csv(forked_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/10_forked_single_locus_dataset.csv",row.names = TRUE)
+write.csv(forked_single_locus_dataset,"../Summaries and Outputs/10_forked_single_locus_dataset.csv",row.names = TRUE)
 
 carnation_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                        phenotypic_class_sums_vector[3],
@@ -967,7 +967,7 @@ carnation_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                        phenotypic_class_sums_vector[128]),
                                    4795)
 names(carnation_single_locus_dataset) <- c("female_wildtype","female_mutant","male_wildtype","male_mutant", "lethal_zygote")
-write.csv(carnation_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/11_carnation_single_locus_dataset.csv",row.names = TRUE)
+write.csv(carnation_single_locus_dataset,"../Summaries and Outputs/11_carnation_single_locus_dataset.csv",row.names = TRUE)
 
 yellow_plus_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                           phenotypic_class_sums_vector[4],
@@ -1099,5 +1099,5 @@ yellow_plus_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                           phenotypic_class_sums_vector[127]),
                                       4795)
 names(yellow_plus_single_locus_dataset) <- c("female_wildtype","female_mutant","male_wildtype","male_mutant", "lethal_zygote")
-write.csv(yellow_plus_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/12_yellow_plus_single_locus_dataset.csv",row.names = TRUE)
+write.csv(yellow_plus_single_locus_dataset,"../Summaries and Outputs/12_yellow_plus_single_locus_dataset.csv",row.names = TRUE)
 
