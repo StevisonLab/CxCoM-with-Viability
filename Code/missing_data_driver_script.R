@@ -1,4 +1,4 @@
-setwd("~/Desktop/local_missing_data")
+setwd("...") # Please use Raw Data as working directory
 
 # Load package dfoptim
 library(dfoptim)
@@ -12,21 +12,21 @@ SK_marker_free_adult_count <- read.csv("C_SK_raw_marker_free_adult_counts.csv", 
 EH_raw_marker_free_total_egg_count <- EH_marker_free_egg_count$total_egg_count
 MS_raw_marker_free_total_egg_count <- MS_marker_free_egg_count$total_egg_count
 compiled_raw_marker_free_dataset <- cbind(SK_marker_free_adult_count,EH_raw_marker_free_total_egg_count,MS_raw_marker_free_total_egg_count)
-write.csv(compiled_raw_marker_free_dataset,"/Users/spencerkoury/Desktop/local_missing_data/D_compiled_raw_marker_free_dataset.csv",row.names = TRUE)
+write.csv(compiled_raw_marker_free_dataset,"../Summaries and Outputs/D_compiled_raw_marker_free_dataset.csv",row.names = TRUE)
 
 # Transform individual raw egg counts to address undercounting the average and round these two counts to the nearest whole number
 EH_transformed_marker_free_total_egg_count <-(EH_raw_marker_free_total_egg_count-2.383755)/0.9459906 # Slope and Intercept from Type II Regression on Schneider et al. 2025 dataset
 MS_transformed_marker_free_total_egg_count <-(MS_raw_marker_free_total_egg_count-11.07247)/0.7537183 # Slope and Intercept from Type II Regression on Schneider et al. 2025 dataset
 transformed_mean_marker_free_total_egg_count <-round((EH_transformed_marker_free_total_egg_count+MS_transformed_marker_free_total_egg_count)/2)
 derived_marker_free_dataset <-cbind(compiled_raw_marker_free_dataset,transformed_mean_marker_free_total_egg_count)
-write.csv(derived_marker_free_dataset,"/Users/spencerkoury/Desktop/local_missing_data/E_derived_marker_free_dataset.csv",row.names = TRUE)
+write.csv(derived_marker_free_dataset,"../Summaries and Outputs/E_derived_marker_free_dataset.csv",row.names = TRUE)
 
 # Calculate the per vial viability of females, males, and total under the 1:1 primary sex ratio assumption
 derived_marker_free_female_viability <- derived_marker_free_dataset$female_adult_count/(derived_marker_free_dataset$transformed_mean_marker_free_total_egg_count/2)
 derived_marker_free_male_viability <- derived_marker_free_dataset$male_adult_count/(derived_marker_free_dataset$transformed_mean_marker_free_total_egg_count/2)
 derived_marker_free_total_viability <- derived_marker_free_dataset$total_adult_count/derived_marker_free_dataset$transformed_mean_marker_free_total_egg_count
 marker_free_viability_dataset <-cbind(derived_marker_free_dataset,derived_marker_free_female_viability,derived_marker_free_male_viability,derived_marker_free_total_viability)
-write.csv(marker_free_viability_dataset,"/Users/spencerkoury/Desktop/local_missing_data/F_marker_free_viability_dataset.csv",row.names = TRUE)
+write.csv(marker_free_viability_dataset,"../Summaries and Outputs/F_marker_free_viability_dataset.csv",row.names = TRUE)
 
 # Compute the overall viabilities for reporting in main text
 overall_marker_free_viability <- mean(derived_marker_free_total_viability)
@@ -51,7 +51,7 @@ marker_free_viability_anova_input$Brood <- as.numeric(marker_free_viability_anov
 marker_free_viability_anova.lm <- lm(Viability ~ Brood + Sex + Cross, data=marker_free_viability_anova_input)
 marker_free_viability_anova.table <- anova(marker_free_viability_anova.lm)
 marker_free_viability_regression_coefficients <- summary(marker_free_viability_anova.lm)
-write.csv(marker_free_viability_anova.table,"/Users/spencerkoury/Desktop/local_missing_data/table_S1_marker_free_viability_regression.csv",row.names = TRUE)
+write.csv(marker_free_viability_anova.table,"table_S1_marker_free_viability_regression.csv",row.names = TRUE)
 
 # Read in csv files of raw count data from the multiply marked cross
 EH_multiply_marked_egg_count <- read.csv("1_EH_raw_multiply_marked_egg_counts.csv", header=TRUE)
@@ -62,21 +62,21 @@ SK_multiply_marked_adult_phenotypic_class_counts <- read.csv("3_SK_raw_multiply_
 EH_raw_multiply_marked_total_egg_count <- EH_multiply_marked_egg_count$total_egg_count
 MS_raw_multiply_marked_total_egg_count <- MS_multiply_marked_egg_count$total_egg_count
 compiled_raw_multiply_marked_dataset <- cbind(SK_multiply_marked_adult_phenotypic_class_counts,EH_raw_multiply_marked_total_egg_count,MS_raw_multiply_marked_total_egg_count)
-write.csv(compiled_raw_multiply_marked_dataset,"/Users/spencerkoury/Desktop/local_missing_data/4_compiled_raw_multiply_marked_dataset.csv",row.names = TRUE)
+write.csv(compiled_raw_multiply_marked_dataset,"../Summaries and Outputs/4_compiled_raw_multiply_marked_dataset.csv",row.names = TRUE)
 
 # Transform individual raw egg counts to address undercounting the average and round these two counts to the nearest whole number
 EH_transformed_multiply_marked_total_egg_count <-(EH_raw_multiply_marked_total_egg_count-2.383755)/0.9459906 # Slope and Intercept from Type II anova on Schneider et al. 2025 dataset
 MS_transformed_multiply_marked_total_egg_count <-(MS_raw_multiply_marked_total_egg_count-11.07247)/0.7537183 # Slope and Intercept from Type II anova on Schneider et al. 2025 dataset
 transformed_mean_multiply_marked_total_egg_count <-round((EH_transformed_multiply_marked_total_egg_count+MS_transformed_multiply_marked_total_egg_count)/2)
 derived_multiply_marked_dataset <-cbind(compiled_raw_multiply_marked_dataset,transformed_mean_multiply_marked_total_egg_count)
-write.csv(derived_multiply_marked_dataset,"/Users/spencerkoury/Desktop/local_missing_data/5_derived_multiply_marked_dataset.csv",row.names = TRUE)
+write.csv(derived_multiply_marked_dataset,"../Summaries and Outputs/5_derived_multiply_marked_dataset.csv",row.names = TRUE)
 
 # Calculate the per vial viability of females, males, and total under the 1:1 primary sex ratio assumption
 derived_multiply_marked_female_viability <- derived_multiply_marked_dataset$female_adult_count/(derived_multiply_marked_dataset$transformed_mean_multiply_marked_total_egg_count/2)
 derived_multiply_marked_male_viability <- derived_multiply_marked_dataset$male_adult_count/(derived_multiply_marked_dataset$transformed_mean_multiply_marked_total_egg_count/2)
 derived_multiply_marked_total_viability <- derived_multiply_marked_dataset$total_adult_count/derived_multiply_marked_dataset$transformed_mean_multiply_marked_total_egg_count
 multiply_marked_viability_dataset <-cbind(derived_multiply_marked_dataset,derived_multiply_marked_female_viability,derived_multiply_marked_male_viability,derived_multiply_marked_total_viability)
-write.csv(multiply_marked_viability_dataset,"/Users/spencerkoury/Desktop/local_missing_data/6_multiply_marked_viability_dataset.csv",row.names = TRUE)
+write.csv(multiply_marked_viability_dataset,"../Summaries and Outputs/6_multiply_marked_viability_dataset.csv",row.names = TRUE)
 
 # Compute the overall mean viabilities for reporting in main text (excluding Broods G, H, and I where adult flies could not be scored)
 overall_multiply_marked_viability <- mean(derived_multiply_marked_total_viability[-c(61:90)])
@@ -104,7 +104,7 @@ cleaned_multiply_marked_viability_anova_input <- multiply_marked_viability_anova
 multiply_marked_viability_anova.lm <- lm(Viability ~ Brood + Sex + Cross, data=cleaned_multiply_marked_viability_anova_input)
 multiply_marked_viability_anova.table <- anova(multiply_marked_viability_anova.lm)
 multiply_marked_viability_regression_coefficients <- summary(multiply_marked_viability_anova.lm)
-write.csv(multiply_marked_viability_anova.table,"/Users/spencerkoury/Desktop/local_missing_data/table_S2_multiply_marked_viability_regression.csv",row.names = TRUE)
+write.csv(multiply_marked_viability_anova.table,"../Summaries and Outputs/table_S2_multiply_marked_viability_regression.csv",row.names = TRUE)
 
 #Create 6 single locus datasets as vectors
 phenotypic_class_dataset <- multiply_marked_viability_dataset[,c(7:134)]
@@ -242,12 +242,12 @@ scute_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
 
 # Write csv for the single locus dataset
 names(scute_single_locus_dataset) <- c("female_wildtype", "male_wildtype", "female_mutant", "male_mutant", "lethal_zygote")
-write.csv(scute_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/7_scute_single_locus_dataset.csv",row.names = TRUE)
+write.csv(scute_single_locus_dataset,"../Summaries and Outputs/7_scute_single_locus_dataset.csv",row.names = TRUE)
 
 # Perform single-locus goodness-of-fit G-tests for scute calling custom function from "single_locus_analysis_custom_function.R"
 single_locus_input <- scute_single_locus_dataset
 scute_G_test_table <- single_locus_analysis()
-write.csv(scute_G_test_table,"/Users/spencerkoury/Desktop/local_missing_data/table_S3_scute_single_locus_G_tests.csv",row.names = TRUE)
+write.csv(scute_G_test_table,"../Summaries and Outputs/table_S3_scute_single_locus_G_tests.csv",row.names = TRUE)
 
 crossveinless_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                            phenotypic_class_sums_vector[3],
@@ -379,12 +379,12 @@ crossveinless_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                            phenotypic_class_sums_vector[127]),
                                        4795)
 names(crossveinless_single_locus_dataset) <- c("female_wildtype", "male_wildtype", "female_mutant", "male_mutant", "lethal_zygote")
-write.csv(crossveinless_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/8_crossveinless_single_locus_dataset.csv",row.names = TRUE)
+write.csv(crossveinless_single_locus_dataset,"../Summaries and Outputs/8_crossveinless_single_locus_dataset.csv",row.names = TRUE)
 
 # Perform single-locus goodness-of-fit G-tests for crossveinless calling custom function from "single_locus_analysis_custom_function.R"
 single_locus_input <- crossveinless_single_locus_dataset
 crossveinless_G_test_table <- single_locus_analysis()
-write.csv(crossveinless_G_test_table,"/Users/spencerkoury/Desktop/local_missing_data/table_S4_crossveinless_single_locus_G_tests.csv",row.names = TRUE)
+write.csv(crossveinless_G_test_table,"../Summaries and Outputs/table_S4_crossveinless_single_locus_G_tests.csv",row.names = TRUE)
 
 vermilion_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                          phenotypic_class_sums_vector[3],
@@ -516,12 +516,12 @@ vermilion_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                          phenotypic_class_sums_vector[128]),
                                      4795)
 names(vermilion_single_locus_dataset) <- c("female_wildtype", "male_wildtype", "female_mutant", "male_mutant", "lethal_zygote")
-write.csv(vermilion_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/9_vermilion_single_locus_dataset.csv",row.names = TRUE)
+write.csv(vermilion_single_locus_dataset,"../Summaries and Outputs/9_vermilion_single_locus_dataset.csv",row.names = TRUE)
 
 # Perform single-locus goodness-of-fit G-tests for vermilion calling custom function from "single_locus_analysis_custom_function.R"
 single_locus_input <- vermilion_single_locus_dataset
 vermilion_G_test_table <- single_locus_analysis()
-write.csv(vermilion_G_test_table,"/Users/spencerkoury/Desktop/local_missing_data/table_S5_vermilion_single_locus_G_tests.csv",row.names = TRUE)
+write.csv(vermilion_G_test_table,"../Summaries and Outputs/table_S5_vermilion_single_locus_G_tests.csv",row.names = TRUE)
 
 forked_single_locus_dataset <-c(sum(phenotypic_class_sums_vector[1],
                                     phenotypic_class_sums_vector[3],
@@ -653,12 +653,12 @@ forked_single_locus_dataset <-c(sum(phenotypic_class_sums_vector[1],
                                     phenotypic_class_sums_vector[127]),
                                 4795)
 names(forked_single_locus_dataset) <- c("female_wildtype", "male_wildtype", "female_mutant", "male_mutant", "lethal_zygote")
-write.csv(forked_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/10_forked_single_locus_dataset.csv",row.names = TRUE)
+write.csv(forked_single_locus_dataset,"../Summaries and Outputs/10_forked_single_locus_dataset.csv",row.names = TRUE)
 
 # Perform single-locus goodness-of-fit G-tests for forked calling custom function from "single_locus_analysis_custom_function.R"
 single_locus_input <- forked_single_locus_dataset
 forked_G_test_table <- single_locus_analysis()
-write.csv(forked_G_test_table,"/Users/spencerkoury/Desktop/local_missing_data/table_S6_forked_single_locus_G_tests.csv",row.names = TRUE)
+write.csv(forked_G_test_table,"../Summaries and Outputs/table_S6_forked_single_locus_G_tests.csv",row.names = TRUE)
 
 carnation_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                        phenotypic_class_sums_vector[3],
@@ -790,12 +790,12 @@ carnation_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                        phenotypic_class_sums_vector[128]),
                                    4795)
 names(carnation_single_locus_dataset) <- c("female_wildtype", "male_wildtype", "female_mutant", "male_mutant", "lethal_zygote")
-write.csv(carnation_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/11_carnation_single_locus_dataset.csv",row.names = TRUE)
+write.csv(carnation_single_locus_dataset,"../Summaries and Outputs/11_carnation_single_locus_dataset.csv",row.names = TRUE)
 
 # Perform single-locus goodness-of-fit G-tests for carnation calling custom function from "single_locus_analysis_custom_function.R"
 single_locus_input <- carnation_single_locus_dataset
 carnation_G_test_table <- single_locus_analysis()
-write.csv(carnation_G_test_table,"/Users/spencerkoury/Desktop/local_missing_data/table_S7_carnation_single_locus_G_tests.csv",row.names = TRUE)
+write.csv(carnation_G_test_table,"../Summaries and Outputs/table_S7_carnation_single_locus_G_tests.csv",row.names = TRUE)
 
 yellow_plus_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                           phenotypic_class_sums_vector[4],
@@ -927,12 +927,12 @@ yellow_plus_single_locus_dataset <- c(sum(phenotypic_class_sums_vector[1],
                                           phenotypic_class_sums_vector[127]),
                                       4795)
 names(yellow_plus_single_locus_dataset) <- c("female_wildtype", "male_wildtype", "female_mutant", "male_mutant", "lethal_zygote")
-write.csv(yellow_plus_single_locus_dataset,"/Users/spencerkoury/Desktop/local_missing_data/12_yellow_plus_single_locus_dataset.csv",row.names = TRUE)
+write.csv(yellow_plus_single_locus_dataset,"../Summaries and Outputs/12_yellow_plus_single_locus_dataset.csv",row.names = TRUE)
 
 # Perform single-locus goodness-of-fit G-tests for yellow plus calling custom function from "single_locus_analysis_custom_function.R"
 single_locus_input <- yellow_plus_single_locus_dataset
 yellow_plus_G_test_table <- single_locus_analysis()
-write.csv(yellow_plus_G_test_table,"/Users/spencerkoury/Desktop/local_missing_data/table_S8_yellow_plus_single_locus_G_tests.csv",row.names = TRUE)
+write.csv(yellow_plus_G_test_table,"../Summaries and Outputs/table_S8_yellow_plus_single_locus_G_tests.csv",row.names = TRUE)
 
 # Create input data file for fitting Cx(Co)M model to flies pooled by individual vials
 # Remove Broods G, H, and I where adult flies could not be scored, remove extraneous meta-data columns
@@ -947,7 +947,7 @@ female_viability_vector <- rep(0.921, 70)
 male_viability_vector <- rep(0.921, 70)
 multi_locus_individual_vials_dataset <- cbind(pruned_derived_multiply_marked_dataset,total_viability_vector,female_viability_vector,male_viability_vector)
 names(multi_locus_individual_vials_dataset) <- c("ID", paste0("class_", 1:132))
-write.csv(multi_locus_individual_vials_dataset,"/Users/spencerkoury/Desktop/local_missing_data/13_multi_locus_individual_vials_dataset.csv",row.names = TRUE)
+write.csv(multi_locus_individual_vials_dataset,"../Summaries and Outputs/13_multi_locus_individual_vials_dataset.csv",row.names = TRUE)
 
 # Create input data file for fitting Cx(Co)M model to flies pooled by replicate cross using individual_vials_dataset
 cross_pooling_matrix <- multi_locus_individual_vials_dataset[,-c(1,131,132,133)]
@@ -976,7 +976,7 @@ unique_cross_id <- c("SK_14_1", "SK_14_3", "SK_14_5", "SK_14_6", "SK_14_8", "SK_
 cross_viability_vector <- c(0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921)
 multi_locus_cross_pooled_dataset <- as.data.frame(cbind(unique_cross_id, multi_locus_cross_pooled_dataset, cross_viability_vector, cross_viability_vector, cross_viability_vector))
 names(multi_locus_cross_pooled_dataset) <- c("ID", paste0("class_", 1:132))
-write.csv(multi_locus_cross_pooled_dataset,"/Users/spencerkoury/Desktop/local_missing_data/14_multi_locus_cross_pooled_dataset.csv",row.names = TRUE)
+write.csv(multi_locus_cross_pooled_dataset,"../Summaries and Outputs/14_multi_locus_cross_pooled_dataset.csv",row.names = TRUE)
 
 # Create input data file for fitting Cx(Co)M model to flies pooled by brooding period using individual_vials_dataset
 brood_pooling_matrix <- multi_locus_individual_vials_dataset[,-c(1,131,132,133)]
@@ -999,7 +999,7 @@ unique_brood_id <- c("SK_14_A", "SK_14_B", "SK_14_C", "SK_14_D", "SK_14_E", "SK_
 brood_viability_vector <- c(0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921)
 multi_locus_brood_pooled_dataset <- as.data.frame(cbind(unique_brood_id, multi_locus_brood_pooled_dataset, brood_viability_vector, brood_viability_vector, brood_viability_vector))
 names(multi_locus_brood_pooled_dataset) <- c("ID", paste0("class_", 1:132))
-write.csv(multi_locus_brood_pooled_dataset,"/Users/spencerkoury/Desktop/local_missing_data/15_multi_locus_brood_pooled_dataset.csv",row.names = TRUE)
+write.csv(multi_locus_brood_pooled_dataset,"15_multi_locus_brood_pooled_dataset.csv",row.names = TRUE)
 
 # Create input data file for fitting Cx(Co)M model to flies pooled for the full experiment using individual_vials_dataset
 full_experiment_matrix <- multi_locus_individual_vials_dataset[,-c(1,131,132,133)]
@@ -1011,7 +1011,7 @@ full_experiment_vector <- c(0.921, 0.921)
 multi_locus_full_experiment_dataset <- as.data.frame(cbind(full_experiment_id, multi_locus_full_experiment_dataset, full_experiment_vector, full_experiment_vector, full_experiment_vector))
 multi_locus_full_experiment_dataset <- multi_locus_full_experiment_dataset[-2,]
 names(multi_locus_full_experiment_dataset) <- c("ID", paste0("class_", 1:132))
-write.csv(multi_locus_full_experiment_dataset,"/Users/spencerkoury/Desktop/local_missing_data/16_multi_locus_full_experiment_dataset.csv",row.names = TRUE)
+write.csv(multi_locus_full_experiment_dataset,"../Summaries and Outputs/16_multi_locus_full_experiment_dataset.csv",row.names = TRUE)
 
 # Create a vector of observed values for fitting CxCoM model
 single_experimental_unit <- as.numeric(multi_locus_full_experiment_dataset)
@@ -1133,7 +1133,7 @@ for (v in 1:max_p_value) {
 # Print the sorted table for records, make sure to RENAME FILE
 MLE_H0_full<-as.data.frame(MLE_H0_full_outputs)
 df0 <- MLE_H0_full[order(MLE_H0_full$lnL),]
-write.csv(df0,"/Users/spencerkoury/Desktop/local_missing_data/17_multi_locus_full_experiment_H0_mle_output.csv",row.names = TRUE)
+write.csv(df0,"../Summaries and Outputs/17_multi_locus_full_experiment_H0_mle_output.csv",row.names = TRUE)
 
 
 # Begin algorithm for fitting CxCoM H1 to full experiment dataset
@@ -1255,7 +1255,7 @@ for (v in 1:max_p_value) {
 # Print the sorted table for records, make sure to RENAME FILE
 MLE_H1_full<-as.data.frame(MLE_H1_full_outputs)
 df1 <- MLE_H1_full[order(MLE_H1_full$lnL),]
-write.csv(df1,"/Users/spencerkoury/Desktop/local_missing_data/18_multi_locus_full_experiment_H1_mle_output.csv",row.names = TRUE)
+write.csv(df1,"../Summaries and Outputs/18_multi_locus_full_experiment_H1_mle_output.csv",row.names = TRUE)
 
 # Begin algorithm for fitting CxCoM H2 to full experiment dataset
 # Create matrix to store all optimized outputs of CxCoM.Likelihood.H2
@@ -1386,7 +1386,7 @@ for (v in 1:max_p_value) {
 # Print the sorted table for records, make sure to RENAME FILE
 MLE_H2_full<-as.data.frame(MLE_H2_full_outputs)
 df2 <- MLE_H2_full[order(MLE_H2_full$lnL),]
-write.csv(df2,"/Users/spencerkoury/Desktop/local_missing_data/19_multi_locus_full_experiment_H2_mle_output.csv",row.names = TRUE)
+write.csv(df2,"../Summaries and Outputs/19_multi_locus_full_experiment_H2_mle_output.csv",row.names = TRUE)
 
 # Begin algorithm for fitting CxCoM H3 to full experiment dataset
 # Create matrix to store all optimized outputs of CxCoM.Likelihood.H3
@@ -1529,7 +1529,7 @@ for (v in 1:max_p_value) {
 # Print the sorted table for records, make sure to RENAME FILE
 MLE_H3_full<-as.data.frame(MLE_H3_full_outputs)
 df3 <- MLE_H3_full[order(MLE_H3_full$lnL),]
-write.csv(df3,"/Users/spencerkoury/Desktop/local_missing_data/20_multi_locus_full_experiment_H3_mle_output.csv",row.names = TRUE)
+write.csv(df3,"../Summaries and Outputs/20_multi_locus_full_experiment_H3_mle_output.csv",row.names = TRUE)
 
 # RUN H3 ON VIAL, PERFORM REGRESSION
 
@@ -1728,13 +1728,13 @@ for (g in 1:70) {
 
 MLE_H3_looped_vials_outputs
 
-write.csv(MLE_H3_looped_vials_outputs,"/Users/spencerkoury/Desktop/local_missing_data/23_multi_locus_individual_vials_H3_mle_output.csv",row.names = TRUE)
+write.csv(MLE_H3_looped_vials_outputs,"../Summaries and Outputs/21_multi_locus_individual_vials_H3_mle_output.csv",row.names = TRUE)
 
 # Perform ANOVA on individual vial estimates fitting an intercept only model
 vials_pooled_anova_input <- as.data.frame(MLE_H3_looped_vials_outputs)
 vials_pooled_anova.lm <- lm(vials_pooled_anova_input$MLE_X_length ~ 1, data=vials_pooled_anova_input)
 vials_pooled_anova_anova.table <- anova(vials_pooled_anova.lm)
-write.csv(vials_pooled_anova_anova.table,"/Users/spencerkoury/Desktop/local_missing_data/table_S10_vials_pooled_anova.csv",row.names = TRUE)
+write.csv(vials_pooled_anova_anova.table,"../Summaries and Outputs/table_S10_vials_pooled_anova.csv",row.names = TRUE)
 
 
 
@@ -1932,13 +1932,13 @@ for (g in 1:10) {
 }
 
 MLE_H3_looped_cross_outputs
-write.csv(MLE_H3_looped_cross_outputs,"/Users/spencerkoury/Desktop/local_missing_data/22_multi_locus_cross_pooled_H3_mle_output.csv",row.names = TRUE)
+write.csv(MLE_H3_looped_cross_outputs,"../Summaries and Outputs/22_multi_locus_cross_pooled_H3_mle_output.csv",row.names = TRUE)
 
 # Perform ANOVA on cross pooled estimates fitting an intercept only model
 cross_pooled_anova_input <- as.data.frame(MLE_H3_looped_cross_outputs)
 cross_pooled_anova.lm <- lm(cross_pooled_anova_input$MLE_X_length ~ 1, data=cross_pooled_anova_input)
 cross_pooled_anova_anova.table <- anova(cross_pooled_anova.lm)
-write.csv(cross_pooled_anova_anova.table,"/Users/spencerkoury/Desktop/local_missing_data/table_S11_cross_pooled_anova.csv",row.names = TRUE)
+write.csv(cross_pooled_anova_anova.table,"../Summaries and Outputs/table_S11_cross_pooled_anova.csv",row.names = TRUE)
 
 
 # RUN H3 on Brood
@@ -2136,10 +2136,10 @@ for (g in 1:7) {
 }
 
 MLE_H3_looped_brood_outputs
-write.csv(MLE_H3_looped_brood_outputs,"/Users/spencerkoury/Desktop/local_missing_data/23_multi_locus_brood_pooled_H3_mle_output.csv",row.names = TRUE)
+write.csv(MLE_H3_looped_brood_outputs,"../Summaries and Outputs/23_multi_locus_brood_pooled_H3_mle_output.csv",row.names = TRUE)
 
 # Perform ANOVA on brood pooled estimates fitting an intercept only model
 brood_pooled_anova_input <- as.data.frame(MLE_H3_looped_brood_outputs)
 brood_pooled_anova.lm <- lm(brood_pooled_anova_input$MLE_X_length ~ 1, data=brood_pooled_anova_input)
 brood_pooled_anova_anova.table <- anova(brood_pooled_anova.lm)
-write.csv(brood_pooled_anova_anova.table,"/Users/spencerkoury/Desktop/local_missing_data/table_S12_brood_pooled_anova.csv",row.names = TRUE)
+write.csv(brood_pooled_anova_anova.table,"../Summaries and Outputs/table_S12_brood_pooled_anova.csv",row.names = TRUE)

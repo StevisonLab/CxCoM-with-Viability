@@ -1,4 +1,4 @@
-To perform all R analyses in "An extension of the Cx(Co)^m model of crossover patterning to account for experimental mortality in Drosophila melanogaster" there are six raw data input files in "Raw Data" folder
+To perform all R analyses in "An extension of the Cx(Co)^m model of crossover patterning to account for experimental mortality in Drosophila melanogaster" there are six raw data input files in "Raw Data" folder, please set this as your working directory
 
 1) 1_EH_raw_multiply_marked_egg_count.csv
 2) 2_MS_raw_multiply_marked_egg_count.csv
