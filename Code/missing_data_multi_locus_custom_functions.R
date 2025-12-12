@@ -61,8 +61,8 @@ CxCoM.Likelihood.H0 <- function(parameters) {
   # Vectors for internal use in the custom function
   # Dimensions auto-adjusted for combinations of p
   y <- parameters[1:5]
-  marker_free_female_viability <- single_experimental_unit[135]
-  marker_free_male_viability <- single_experimental_unit[136]
+  marker_free_female_viability <- single_experimental_unit[131]
+  marker_free_male_viability <- single_experimental_unit[132]
   v1_wildtype_f <- 1
   v2_wildtype_f <- 1
   v3_wildtype_f <- 1
@@ -2199,8 +2199,8 @@ CxCoM.Likelihood.H2 <- function(parameters) {
   # Vectors for internal use in the custom function
   # Dimensions auto-adjusted for combinations of p
   y <- parameters[1:5]
-  marker_free_female_viability <- single_experimental_unit[135]
-  marker_free_male_viability <- single_experimental_unit[136]
+  marker_free_female_viability <- single_experimental_unit[131]
+  marker_free_male_viability <- single_experimental_unit[132]
   v1_wildtype_f <- 1
   v2_wildtype_f <- 1
   v3_wildtype_f <- 1
@@ -3268,8 +3268,8 @@ CxCoM.Likelihood.H3 <- function(parameters) {
   # Vectors for internal use in the custom function
   # Dimensions auto-adjusted for combinations of p
   y <- parameters[1:5]
-  marker_free_female_viability <- single_experimental_unit[135]
-  marker_free_male_viability <- single_experimental_unit[136]
+  marker_free_female_viability <- single_experimental_unit[131]
+  marker_free_male_viability <- single_experimental_unit[132]
   v1_wildtype_f <- parameters[6]
   v2_wildtype_f <- parameters[7]
   v3_wildtype_f <- parameters[8]
