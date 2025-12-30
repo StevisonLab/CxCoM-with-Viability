@@ -1,4 +1,4 @@
-setwd("Raw Data/") # Please use Raw Data as working directory
+#setwd("Raw Data/") # Please use Raw Data as working directory
 
 # Begin algorithm for fitting CxCoM H0 to full experiment dataset
 # Create matrix to store all optimized outputs of CxCoM.Likelihood.H0

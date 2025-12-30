@@ -1,4 +1,4 @@
-setwd("Raw Data/") # Please use Raw Data as working directory
+#setwd("Raw Data/") # Please use Raw Data as working directory
 
 # Perform single-locus goodness-of-fit G-tests for scute calling custom function from "single_locus_analysis_custom_function.R"
 single_locus_input <- scute_single_locus_dataset

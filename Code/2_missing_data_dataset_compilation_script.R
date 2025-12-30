@@ -1,4 +1,4 @@
-setwd("Raw Data/") # Please use Raw Data as working directory
+#setwd("Raw Data/") # Please use Raw Data as working directory
 
 # Read in csv files of raw count data from the marker free cross
 EH_marker_free_egg_count <- read.csv("A_EH_raw_marker_free_egg_counts.csv", header=TRUE)
