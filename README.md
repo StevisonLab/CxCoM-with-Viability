@@ -5,7 +5,7 @@ Classic recombination experiments designed to test genetic and environmental tre
 
 # Code Directory
 
-To perform all R analyses in "An extension of the Cx(Co)<sup>m</sup> model of crossover patterning to account for experimental mortality in \_Drosophila melanogaster\_" there are six **raw data** input files in "Raw Data" folder. Please set this as your working directory:
+To perform all R analyses in "An extension of the Cx(Co)<sup>m</sup> model of crossover patterning to account for experimental mortality in _Drosophila melanogaster_" there are six **raw data** input files in "Raw Data" folder. Please set this as your working directory:
 
 There are eight **scripts** to run the analyses in "Code" folder but you only need to run ONE.
 
