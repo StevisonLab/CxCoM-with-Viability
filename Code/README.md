@@ -12,15 +12,21 @@ To perform all R analyses in "An extension of the Cx(Co)^m model of crossover pa
 6. C\_SK\_raw\_marker\_free\_adult\_counts.csv
 
 
-There are three **scripts** to run the analyses in "Code" folder
+There are eight **scripts** to run the analyses in "Code" folder
 
 ## Primary Script files:
 
-1. missing\_data\_driver\_script.R
-2. missing\_data\_single\_locus\_custom\_function.R
-3. missing\_data\_multi\_locus\_custom\_function.R
+1. 1_missing\_data\_driver\_script.R
+2. 2_missing\_data\_dataset\_compilation\_script.R
+3. 3_missing\_data\_single\_locus\_custom\_function.R
+4. 4_missing\_data\_multi\_locus\_custom\_function.R
+5. 5_missing\_data\_organismal\_analysis.R
+6. 6_missing\_data\_single\_locus\_analysis.R
+7. 7_missing\_data\_multi\_locus\_analysis.R
+8. 8_missing\_data\_pooling\_analysis.R
 
-Please first **load the #2 and #3 scripts above** for custom functions of single and multi-locus analyses, then run the #1 missing\_data\_driver\_script.R
+
+1_missing\_data\_driver\_script.R sources each of these scripts, as well as loading the package dfoptim()
 
 ## Output files:
 
