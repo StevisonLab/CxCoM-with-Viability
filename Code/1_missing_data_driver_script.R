@@ -21,4 +21,5 @@ source(file = "../Code/6_missing_data_single_locus_analysis.R")
 source(file = "../Code/7_missing_data_multi_locus_analysis.R")
 
 # Perform alternate pooling viability analyses
+# This script will also take a LONG time!
 source(file = "../Code/8_missing_data_pooling_analysis.R")
